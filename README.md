@@ -18,3 +18,13 @@ Sin imágenes con derechos: la maqueta del POS es HTML/CSS y los logos son icono
 docker build -t sucova-landing .
 docker run -p 8080:80 sucova-landing   # http://localhost:8080
 ```
+
+## SEO
+
+Título, meta description, canonical, Open Graph, Twitter Card, JSON-LD (Organization, WebSite, SoftwareApplication, FAQPage), `robots.txt`, `sitemap.xml` y `site.webmanifest`.
+Compila con tu dominio real para que canonical, OG y sitemap apunten bien:
+
+```bash
+SITE_URL=https://tudominio.com npm run build
+docker build --build-arg SITE_URL=https://tudominio.com -t sucova-landing .
+```

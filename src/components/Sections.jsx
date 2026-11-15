@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { motion, useInView, animate } from "framer-motion";
 import { FaWifi, FaCloud, FaPlus } from "react-icons/fa6";
 import { services, modules, tech, steps, founders, stats } from "../data/content";
+import { faq } from "../data/faq";
 import { Reveal, SectionHead, spotMove, Logo } from "./ui";
 
 const wrap = "mx-auto max-w-6xl px-5";
@@ -192,5 +193,26 @@ export function Footer() {
         <p>© {new Date().getFullYear()} Sucova</p>
       </div>
     </footer>
+  );
+}
+
+export function FAQ() {
+  return (
+    <section id="preguntas" className={`${wrap} py-24`}>
+      <SectionHead kicker="Preguntas frecuentes" title="Lo que más nos preguntan" text="Respuestas rápidas sobre Sucova, InternPoS e InternSys." />
+      <div className="mx-auto max-w-3xl space-y-3">
+        {faq.map((f, k) => (
+          <Reveal key={f.q} delay={k * 0.05}>
+            <details className="group rounded-2xl border border-slate-200 bg-white p-5 transition open:shadow-lg open:shadow-brand-600/10">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-bold text-ink">
+                <h3 className="text-base font-bold">{f.q}</h3>
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-600 transition group-open:rotate-45"><FaPlus /></span>
+              </summary>
+              <p className="mt-3 leading-relaxed text-slate-600">{f.a}</p>
+            </details>
+          </Reveal>
+        ))}
+      </div>
+    </section>
   );
 }
