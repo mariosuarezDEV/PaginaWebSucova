@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { faq } from "./src/data/faq.js";
 
 // URL pública del sitio (canonical, Open Graph, sitemap). Defínela al compilar: SITE_URL=https://tudominio.com
-const SITE_URL = (process.env.SITE_URL || "https://sucova.com").replace(/\/$/, "");
+const SITE_URL = (process.env.SITE_URL || "https://www.sucova.cloud").replace(/\/$/, "");
 
 const jsonld = {
   "@context": "https://schema.org",

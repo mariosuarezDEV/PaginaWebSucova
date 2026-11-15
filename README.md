@@ -25,6 +25,6 @@ Título, meta description, canonical, Open Graph, Twitter Card, JSON-LD (Organiz
 Compila con tu dominio real para que canonical, OG y sitemap apunten bien:
 
 ```bash
-SITE_URL=https://tudominio.com npm run build
-docker build --build-arg SITE_URL=https://tudominio.com -t sucova-landing .
+SITE_URL=https://www.sucova.cloud npm run build
+docker build --build-arg SITE_URL=https://www.sucova.cloud -t sucova-landing .
 ```

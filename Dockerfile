@@ -4,8 +4,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-# URL pública para canonical, Open Graph y sitemap: docker build --build-arg SITE_URL=https://tudominio.com .
-ARG SITE_URL=https://sucova.com
+# URL pública para canonical, Open Graph y sitemap: docker build --build-arg SITE_URL=https://www.sucova.cloud .
+ARG SITE_URL=https://www.sucova.cloud
 ENV SITE_URL=$SITE_URL
 RUN npm run build
 
