@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion, useInView, animate } from "framer-motion";
-import { FaArrowRight, FaWifi, FaCloud, FaPlus } from "react-icons/fa6";
-import { services, modules, tech, steps, founders, stats, LOGIN_URL } from "../data/content";
+import { FaWifi, FaCloud, FaPlus } from "react-icons/fa6";
+import { services, modules, tech, steps, founders, stats } from "../data/content";
 import { Reveal, SectionHead, spotMove, Logo } from "./ui";
 
 const wrap = "mx-auto max-w-6xl px-5";
@@ -179,23 +179,6 @@ export function Team() {
           ))}
         </div>
       </div>
-    </section>
-  );
-}
-
-export function CTA() {
-  return (
-    <section className={`${wrap} py-24`}>
-      <Reveal>
-        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-600 via-violet-600 to-indigo-800 px-6 py-16 text-center text-white">
-          <div className="absolute inset-0 opacity-20 grid-bg" />
-          <h2 className="relative text-3xl font-extrabold sm:text-5xl">¿Ya tienes cuenta?</h2>
-          <p className="relative mx-auto mt-3 max-w-md text-indigo-100">Entra a tu sistema y sigue operando tu negocio.</p>
-          <a href={LOGIN_URL} className="group relative mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 font-bold text-brand-700 shadow-xl transition hover:-translate-y-0.5">
-            Iniciar sesión <FaArrowRight className="transition group-hover:translate-x-1" />
-          </a>
-        </div>
-      </Reveal>
     </section>
   );
 }

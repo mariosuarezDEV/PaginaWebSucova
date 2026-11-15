@@ -7,17 +7,6 @@ import {
 } from "react-icons/si";
 import { FaAws } from "react-icons/fa6";
 
-// Enlace del botón "Iniciar sesión": cámbialo con VITE_LOGIN_URL al desplegar.
-export const LOGIN_URL = import.meta.env.VITE_LOGIN_URL || "/core/login/";
-
-export const nav = [
-  { href: "#que-hacemos", label: "Qué hacemos" },
-  { href: "#sistemas", label: "Sistemas" },
-  { href: "#modulos", label: "Módulos" },
-  { href: "#tecnologia", label: "Tecnología" },
-  { href: "#proceso", label: "Proceso" },
-];
-
 export const rotating = [
   "Punto de venta", "Administración", "Contabilidad", "Facturación",
   "Recursos Humanos", "Inventarios", "Costeo",

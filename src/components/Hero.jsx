@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaArrowRight, FaCheck } from "react-icons/fa6";
-import { rotating, LOGIN_URL } from "../data/content";
+import { FaCheck } from "react-icons/fa6";
+import { rotating } from "../data/content";
 
 function RotatingWord() {
   const [i, setI] = useState(0);
@@ -89,12 +89,6 @@ export default function Hero() {
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
             Vendemos equipos de cómputo, te asesoramos en contabilidad y resolvemos los problemas de tu empresa con software hecho a tu medida.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a href={LOGIN_URL} className="group inline-flex items-center gap-2 rounded-full bg-brand-600 px-7 py-3.5 font-semibold text-white shadow-lg shadow-brand-600/30 transition hover:-translate-y-0.5 hover:bg-brand-700">
-              Iniciar sesión <FaArrowRight className="transition group-hover:translate-x-1" />
-            </a>
-            <a href="#que-hacemos" className="rounded-full border border-slate-300 bg-white/70 px-7 py-3.5 font-semibold text-slate-700 backdrop-blur transition hover:border-brand-500 hover:text-brand-700">Conocer más</a>
-          </div>
         </motion.div>
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>
           <PosMock />
