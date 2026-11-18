@@ -1,62 +1,80 @@
+// Todo el texto de la página. Solo información confirmada por Sucova: no se inventan cifras ni clientes.
 import {
-  FaCashRegister, FaBuildingColumns, FaCalculator, FaFileInvoiceDollar,
-  FaUsers, FaBoxesStacked, FaCoins, FaLaptop, FaCode,
+  FaCalculator, FaLaptop, FaCode, FaLightbulb,
+  FaCashRegister, FaBuildingColumns, FaFileInvoiceDollar, FaUsers, FaBoxesStacked, FaCoins,
+  FaFileInvoice, FaMoneyBillTransfer as FaBank, FaIdCard,
 } from "react-icons/fa6";
-import {
-  SiDjango, SiPostgresql, SiRailway, SiDocker, SiBootstrap, SiHtmx, SiResend, SiNeon, SiPython,
-} from "react-icons/si";
-import { FaAws } from "react-icons/fa6";
 
-export const rotating = [
-  "Punto de venta", "Administración", "Contabilidad", "Facturación",
-  "Recursos Humanos", "Inventarios", "Costeo",
+export const FADI_URL = "https://sistemas.sucova.cloud";
+export const EMAIL = "soporte@servicios.sucova.cloud";
+
+export const nav = [
+  { href: "#servicios", label: "Servicios" },
+  { href: "#sistemas", label: "Sistemas" },
+  { href: "#como-trabajamos", label: "Cómo trabajamos" },
+  { href: "#equipo", label: "Equipo" },
+  { href: "#preguntas", label: "Preguntas" },
 ];
 
 export const services = [
-  { icon: FaLaptop, title: "Equipos de cómputo", text: "Te equipamos con la tecnología que tu negocio necesita para trabajar.", tone: "from-indigo-500 to-blue-500" },
-  { icon: FaCalculator, title: "Asesoría contable", text: "Tus números claros y en orden, con acompañamiento profesional.", tone: "from-emerald-500 to-teal-500" },
-  { icon: FaCode, title: "Soluciones con software", text: "Convertimos los problemas de tu empresa en sistemas que funcionan.", tone: "from-amber-500 to-orange-500" },
+  {
+    icon: FaCalculator, title: "Servicios contables",
+    text: "Llevamos la contabilidad de tu negocio para que tus números estén claros y en orden.",
+  },
+  {
+    icon: FaLaptop, title: "Equipos de cómputo para negocios",
+    text: "Te equipamos con la tecnología que tu negocio necesita para trabajar.",
+    items: ["Venta de equipos", "Instalación y configuración", "Mantenimiento y soporte"],
+  },
+  {
+    icon: FaCode, title: "Desarrollo de software",
+    text: "Convertimos los problemas de tu empresa en sistemas hechos a tu medida.",
+  },
+  {
+    icon: FaLightbulb, title: "Consultoría de software",
+    text: "Te orientamos para elegir, adaptar y aprovechar el software que tu negocio necesita.",
+  },
 ];
 
-export const modules = [
-  { icon: FaCashRegister, title: "Punto de venta", text: "Cobra en segundos: arma el ticket, elige la forma de pago y calcula el cambio. Cada venta se refleja en tus cuentas al instante." },
-  { icon: FaBuildingColumns, title: "Administración", text: "Controla gastos, ingresos y traspasos entre cuentas, con comisiones incluidas, para saber a dónde se va cada peso." },
-  { icon: FaCalculator, title: "Contabilidad", text: "Tus cuentas con el saldo al día y los catálogos del SAT listos, para que tu contador tenga todo a la mano." },
-  { icon: FaFileInvoiceDollar, title: "Facturación", text: "Emite facturas electrónicas (CFDI 4.0) timbradas, con su XML y PDF guardados, sin salir del sistema." },
-  { icon: FaUsers, title: "Recursos Humanos", text: "Organiza a tu equipo: quién trabaja contigo y en qué puesto, con su información en un solo lugar." },
-  { icon: FaBoxesStacked, title: "Inventarios", text: "Sabe qué tienes, qué se vendió y qué toca reponer, para no quedarte sin producto ni con de más." },
-  { icon: FaCoins, title: "Costeo", text: "Calcula cuánto te cuesta cada insumo, qué ganancia ponerle y cuál es tu utilidad neta después de impuestos." },
-];
+// Fadi: datos tomados de su landing (sistemas.sucova.cloud).
+export const fadi = {
+  tagline: "Facturación electrónica",
+  text: "El sistema en línea para empresas en México que quieren emitir sus facturas electrónicas, saber quién les debe, conciliar sus bancos y timbrar su nómina desde un solo lugar.",
+  modules: [
+    { icon: FaFileInvoice, title: "Facturación", text: "Facturas CFDI 4.0 con las reglas del SAT revisadas antes de timbrar. XML y PDF listos para entregar." },
+    { icon: FaBank, title: "Tesorería", text: "Cada factura timbrada se vuelve una cuenta por cobrar. Importa tu estado de cuenta y concilia." },
+    { icon: FaIdCard, title: "Nóminas", text: "Recibos de nómina timbrados con complemento Nómina 1.2, junto a tus facturas." },
+  ],
+  perks: ["CFDI 4.0", "Nómina 1.2", "Conciliación bancaria", "Soporte 24/7 con personas reales"],
+};
 
-export const tech = [
-  { icon: SiDjango, color: "#092E20", cat: "Aplicación", name: "Django", text: "El corazón del sistema: seguro, rápido y con años de comprobada estabilidad." },
-  { icon: SiPython, color: "#3776AB", cat: "Lenguaje", name: "Python", text: "Código claro y mantenible, base de toda la lógica de negocio." },
-  { icon: SiPostgresql, color: "#4169E1", cat: "Base de datos", name: "PostgreSQL", text: "Tus datos guardados en una base de datos robusta." },
-  { icon: SiNeon, color: "#00A67E", cat: "Base de datos en la nube", name: "Neon", text: "PostgreSQL en la nube, siempre disponible." },
-  { icon: FaAws, color: "#FF9900", cat: "Archivos", name: "AWS S3", text: "Tus facturas (XML y PDF) y documentos, guardados de forma privada." },
-  { icon: SiRailway, color: "#0B0D0E", cat: "Hospedaje", name: "Railway", text: "Donde vive el sistema en línea, listo para usarse desde cualquier lugar." },
-  { icon: SiDocker, color: "#2496ED", cat: "Despliegue", name: "Docker", text: "Empaquetamos el sistema para que funcione igual en cualquier entorno." },
-  { icon: SiResend, color: "#000000", cat: "Correo", name: "Resend", text: "Avisos por correo de compras, ventas y accesos, directo a tu bandeja." },
-  { icon: SiBootstrap, color: "#7952B3", cat: "Interfaz", name: "Bootstrap", text: "Pantallas que se adaptan a tu computadora o a tu celular." },
-  { icon: SiHtmx, color: "#3366CC", cat: "Interfaz", name: "htmx", text: "Pantallas ágiles que responden al instante, sin recargar." },
-  { icon: FaFileInvoiceDollar, color: "#4f46e5", cat: "Facturación", name: "ContaDB · satcfdi", text: "Armamos el CFDI 4.0 con satcfdi y lo timbramos con ContaDB." },
-];
+// Contim: en desarrollo. Hará lo mismo que InternSys (el nombre anterior del proyecto).
+export const contim = {
+  text: "Nuestro próximo sistema. Contim reunirá en un solo lugar las herramientas para operar tu empresa, y cada parte hablará con las demás.",
+  modules: [
+    { icon: FaCashRegister, title: "Punto de venta", text: "Arma el ticket, elige la forma de pago y calcula el cambio." },
+    { icon: FaBuildingColumns, title: "Administración", text: "Gastos, ingresos y traspasos entre cuentas." },
+    { icon: FaCalculator, title: "Contabilidad", text: "Tus cuentas con el saldo al día y los catálogos del SAT." },
+    { icon: FaFileInvoiceDollar, title: "Facturación", text: "Facturas electrónicas CFDI 4.0 con su XML y PDF." },
+    { icon: FaUsers, title: "Recursos humanos", text: "Tu equipo y sus puestos, en un solo lugar." },
+    { icon: FaBoxesStacked, title: "Inventarios", text: "Qué tienes, qué se vendió y qué toca reponer." },
+    { icon: FaCoins, title: "Costeo", text: "Costo de cada insumo, margen y utilidad neta." },
+  ],
+};
 
 export const steps = [
-  { n: 1, title: "Modelamos", text: "Dibujamos los procesos de tu negocio con BPMN para entender cómo trabajas hoy." },
-  { n: 2, title: "Adaptamos", text: "Ajustamos InternSys a la forma en que realmente trabajas, no al revés." },
-  { n: 3, title: "Operas", text: "Empiezas a operar sin problemas, con tu negocio ya organizado." },
+  { title: "Entendemos tu negocio", text: "Modelamos tus procesos con BPMN, el estándar para procesos de negocio, para ver cómo trabajas hoy." },
+  { title: "Proponemos la solución", text: "Servicio contable, equipo, uno de nuestros sistemas o un desarrollo a tu medida: lo que de verdad necesites." },
+  { title: "Empiezas a operar", text: "Lo ponemos a funcionar y empiezas a trabajar, con tu negocio ya organizado." },
 ];
 
 export const founders = [
-  { title: "Director de Finanzas y Contabilidad", text: "Cuida que los números de tu negocio estén claros y en regla.", icon: FaCalculator },
-  { title: "Director de Tecnología", text: "Diseña y mantiene el software y los equipos que hacen funcionar tu empresa.", icon: FaCode },
-];
-
-// Cifras reales derivadas del contenido de la página (no se inventan métricas).
-export const stats = [
-  { n: modules.length, label: "Especialidades en InternSys" },
-  { n: 2, label: "Sistemas: InternPoS e InternSys" },
-  { n: tech.length, label: "Tecnologías de confianza" },
-  { n: steps.length, label: "Pasos para empezar a operar" },
+  {
+    initials: "AC", name: "Angel Cova", role: "Socio fundador · Director de Finanzas y Contabilidad",
+    text: "Cuida que los números de tu negocio estén claros y en regla.",
+  },
+  {
+    initials: "LS", name: "Luis Suarez", role: "Socio fundador · Director de TI",
+    text: "Diseña y mantiene el software y los equipos que hacen funcionar tu empresa.",
+  },
 ];
