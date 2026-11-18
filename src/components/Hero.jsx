@@ -1,97 +1,90 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaCheck } from "react-icons/fa6";
-import { rotating } from "../data/content";
+import { motion } from "framer-motion";
+import { FADI_URL } from "../data/content";
+import { Kicker, Dot, Isotipo, ExternalIcon } from "./ui";
 
-function RotatingWord() {
-  const [i, setI] = useState(0);
+// Pantalla de segmentos, como la de una calculadora (el motivo de la identidad).
+const SEG = {
+  a: [8, 0, 40, 10], b: [46, 8, 10, 40], c: [46, 52, 10, 40], d: [8, 90, 40, 10],
+  e: [0, 52, 10, 40], f: [0, 8, 10, 40], g: [8, 45, 40, 10],
+};
+const DIGITS = ["abcdef", "bc", "abged", "abgcd", "fgbc", "afgcd", "afgedc", "abc", "abcdefg", "abcdfg"];
+
+function Digit({ x, n }) {
+  const on = DIGITS[n];
+  return (
+    <g transform={`translate(${x} 0)`}>
+      {Object.entries(SEG).map(([k, [sx, sy, w, h]]) => (
+        <rect key={k} x={sx} y={sy} width={w} height={h} rx="2"
+          className="transition-[fill,opacity] duration-500"
+          fill="#ffffff" opacity={on.includes(k) ? 0.4 : 0.07} />
+      ))}
+    </g>
+  );
+}
+
+function SegmentDisplay() {
+  const [v, setV] = useState([0, 0, 0]);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setI((v) => (v + 1) % rotating.length), 2200);
+    let i = 0;
+    const t = setInterval(() => {
+      i = (i + 1) % 10;
+      setV([i, (i * 3) % 10, (i * 7) % 10]);
+    }, 1600);
     return () => clearInterval(t);
   }, []);
   return (
-    <>
-      <span className="relative inline-grid h-[1.2em] overflow-hidden align-bottom" aria-hidden="true">
-        <span className="invisible whitespace-nowrap">{rotating.reduce((a, b) => (b.length > a.length ? b : a))}</span>
-        <AnimatePresence mode="wait">
-          <motion.span key={i} className="text-gradient absolute left-0 top-0 whitespace-nowrap"
-            initial={{ y: "100%", opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: "-100%", opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}>
-            {rotating[i]}
-          </motion.span>
-        </AnimatePresence>
-      </span>
-      <span className="sr-only">{rotating.join(", ")}.</span>
-    </>
+    <svg viewBox="0 0 226 100" className="w-full max-w-[15rem] sm:max-w-md" role="img" aria-label="Pantalla de calculadora con punto decimal ámbar">
+      <Digit x={0} n={v[0]} />
+      <circle cx="78" cy="92" r="8" fill="#e5b454" className="animate-blink" />
+      <Digit x={100} n={v[1]} />
+      <Digit x={170} n={v[2]} />
+    </svg>
   );
 }
 
-// Maqueta ilustrativa del punto de venta (SVG/CSS, sin imágenes con derechos)
-function PosMock() {
-  const rows = [["Laptop 14\"", "1", "$12,490.00"], ["Mouse inalámbrico", "2", "$398.00"], ["Soporte técnico", "1", "$650.00"]];
-  return (
-    <div className="relative mx-auto w-full max-w-xl">
-      <div className="absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-tr from-brand-500/25 via-violet-400/20 to-cyan-400/25 blur-2xl" />
-      <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-brand-900/10">
-        <div className="flex items-center gap-1.5 border-b border-slate-100 bg-slate-50 px-4 py-3">
-          <span className="h-2.5 w-2.5 rounded-full bg-rose-400" /><span className="h-2.5 w-2.5 rounded-full bg-amber-400" /><span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-          <span className="ml-3 text-xs font-semibold text-slate-400">InternSys · Punto de venta</span>
-        </div>
-        <div className="p-5">
-          <div className="mb-4 flex items-center justify-between">
-            <div><p className="text-xs text-slate-400">Ticket V-0012</p><p className="font-bold text-ink">Venta en curso</p></div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">
-              <span className="h-2 w-2 animate-pulse-dot rounded-full bg-emerald-500" />Pagada
-            </span>
-          </div>
-          <div className="divide-y divide-slate-100 text-sm">
-            {rows.map((r, k) => (
-              <motion.div key={r[0]} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.6 + k * 0.25 }} className="flex items-center justify-between py-2.5">
-                <span className="font-medium text-slate-700">{r[0]} <span className="text-slate-400">×{r[1]}</span></span>
-                <span className="font-semibold text-ink">{r[2]}</span>
-              </motion.div>
-            ))}
-          </div>
-          <div className="mt-4 flex items-end justify-between rounded-xl bg-gradient-to-r from-brand-600 to-violet-500 p-4 text-white">
-            <div><p className="text-xs opacity-80">Total</p><p className="text-2xl font-extrabold">$13,538.00</p></div>
-            <span className="flex items-center gap-1.5 rounded-lg bg-white/20 px-3 py-1.5 text-sm font-semibold"><FaCheck /> Cobrar</span>
-          </div>
-        </div>
-      </motion.div>
-      <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.1 }}
-        className="absolute -bottom-5 -left-4 hidden rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-xl sm:block">
-        <p className="text-xs text-slate-400">Factura CFDI 4.0</p>
-        <p className="flex items-center gap-2 text-sm font-bold text-ink"><span className="h-2 w-2 rounded-full bg-brand-600" />Timbrada · XML + PDF</p>
-      </motion.div>
-    </div>
-  );
-}
+const family = [
+  { letter: "S", bg: "#ffffff", fg: "#17211d", name: "Sucova", note: "Software y contabilidad" },
+  { letter: "F", bg: "#0d5c46", fg: "#ffffff", name: "Fadi", note: "Disponible" },
+  { letter: "C", dashed: true, name: "Contim", note: "En desarrollo" },
+];
 
 export default function Hero() {
   return (
-    <section id="inicio" className="relative isolate overflow-hidden px-5 pb-24 pt-32 sm:pt-40">
-      <div className="grid-bg absolute inset-0 -z-10" />
-      <div className="absolute -left-20 top-10 -z-10 h-72 w-72 animate-float rounded-full bg-brand-500/30 blur-3xl" />
-      <div className="absolute -right-16 top-40 -z-10 h-72 w-72 animate-float rounded-full bg-cyan-400/30 blur-3xl [animation-delay:-4s]" />
-      <div className="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-2">
+    <section id="inicio" className="relative isolate overflow-hidden bg-ink px-4 pb-20 pt-32 sm:px-6 sm:pb-28 sm:pt-40">
+      <div className="grid-dark absolute inset-0 -z-10" />
+      <div className="absolute -right-40 -top-20 -z-10 h-[38rem] w-[38rem] rounded-full bg-fadi/45 blur-[120px]" />
+      <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.25fr_1fr]">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/80 px-4 py-1.5 text-xs font-bold text-brand-700 shadow-sm backdrop-blur">
-            <span className="h-2 w-2 animate-pulse-dot rounded-full bg-emerald-500" />
-            Equipos de cómputo · Asesoría contable · Software
-          </span>
-          <h1 className="mt-6 text-5xl font-extrabold leading-[1.05] tracking-tight text-ink sm:text-6xl">
-            Esto es <span className="text-gradient">Sucova.</span>
-            <span className="mt-2 block text-3xl font-bold text-slate-500 sm:text-4xl">Tu sistema de</span>
-            <span className="block text-4xl sm:text-5xl"><RotatingWord /></span>
+          <Kicker dark>Contabilidad · Equipos · Software</Kicker>
+          <h1 className="mt-6 text-[2.6rem] font-extrabold leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-[4.2rem]">
+            Tus números y tu tecnología, siempre en orden<Dot />
           </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
-            Vendemos equipos de cómputo, te asesoramos en contabilidad y resolvemos los problemas de tu empresa con software hecho a tu medida.
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
+            En Sucova ofrecemos servicios contables, equipos de cómputo para negocios, desarrollo y consultoría de software.
+            Y tenemos nuestros propios sistemas: <strong className="font-semibold text-white">Fadi</strong>, para facturar, y <strong className="font-semibold text-white">Contim</strong>, en desarrollo.
           </p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <a href="#servicios" className="rounded-full bg-amber px-6 py-3 font-semibold text-ink transition hover:bg-amber-300">Ver servicios</a>
+            <a href={FADI_URL} target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-full border border-white/25 px-6 py-3 font-semibold text-white transition hover:border-white hover:bg-white/5">
+              Conoce Fadi <ExternalIcon />
+            </a>
+          </div>
         </motion.div>
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>
-          <PosMock />
+
+        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex flex-col items-center gap-12 lg:items-end">
+          <SegmentDisplay />
+          <ul className="grid w-full max-w-md grid-cols-3 gap-3">
+            {family.map((f) => (
+              <li key={f.name} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur">
+                <Isotipo letter={f.letter} bg={f.bg} fg={f.fg} dashed={f.dashed} className={`h-11 w-11 ${f.dashed ? "text-white/50" : ""}`} />
+                <p className="mt-3 font-display text-lg font-bold text-white">{f.name}</p>
+                <p className="font-mono text-[10px] uppercase tracking-wider text-white/50">{f.note}</p>
+              </li>
+            ))}
+          </ul>
         </motion.div>
       </div>
     </section>
